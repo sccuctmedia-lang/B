@@ -1,10 +1,11 @@
+const photoReferences = {"residence":"Timber and glass at dusk","facade":"Stepped concrete façade","interior":"Material continuity","detail":"Light around a staircase"};
 function formatBrief(fields) {
   const input = (key) => String(fields[key] ?? '').trim();
   const service = input('service');
   const location = input('location');
   const scope = input('scope');
   if (!['Property development', 'Property renovation'].includes(service) || !location || !scope) return '';
-  const details = [['Service', service], ['Property location', location], ['Project stage', input('stage')], ['Timing', input('timing')], ['Budget range', input('budget')]];
+  const details = [['Service', service], ['Property location', location], ['Project stage', input('stage')], ['Timing', input('timing')], ['Budget range', input('budget')], ['Reference photograph', Object.hasOwn(photoReferences, input('reference')) ? photoReferences[input('reference')] : '']];
   return ['PROJECT BRIEF', 'Atlantic Business Group', '', ...details.filter(([, value]) => value).map(([label, value]) => label + ': ' + value), '', 'What I have in mind', scope].join('\n');
 }
 const form = document.querySelector('#project-brief');
@@ -18,7 +19,9 @@ const meter = document.querySelector('#brief-meter');
 const progressText = document.querySelector('#brief-progress-text');
 const storageKey = 'atlantic-project-brief-v1';
 const inputs = [...form.querySelectorAll('[name]')];
-const selected = new URLSearchParams(location.search).get('service');
+const params = new URLSearchParams(location.search);
+const selected = params.get('service');
+const selectedReference = params.get('reference');
 const services = {'development': 'Property development', 'renovation': 'Property renovation'};
 
 function storage(action, text) {
@@ -36,6 +39,7 @@ for (const input of inputs) {
   if (typeof draft[input.name] === 'string') input.value = draft[input.name];
 }
 if (Object.hasOwn(services, selected)) form.elements.service.value = services[selected];
+if (Object.hasOwn(photoReferences, selectedReference)) form.elements.reference.value = selectedReference;
 
 function refresh(save = false) {
   const fields = Object.fromEntries(new FormData(form));
