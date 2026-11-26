@@ -175,3 +175,69 @@ figcaption { padding-top: .55rem; color: var(--muted); }
 .first-conversation h2 { color:var(--navy); margin:.7rem 0 1rem; font-size:clamp(2.2rem,4.3vw,4.35rem); }
 .first-conversation div > p:not(.label) { margin-bottom:1rem; max-width:28rem; }
 @media(max-width:760px) { .first-conversation { grid-template-columns:1fr; } }
+
+/* Architecture references and project enquiry */
+.opening { align-items:stretch; padding-top:clamp(2rem,3.5vw,4.5rem); gap:clamp(1rem,3.5vw,4rem); }
+.opening-copy { align-self:center; }
+.opening-photo { border-left:0; border-bottom:0; padding:0; display:grid; align-content:start; }
+.opening-photo img { filter:none; object-position:56% 46%; }
+.opening-photo figcaption { display:flex; justify-content:space-between; flex-wrap:wrap; gap:.4rem 1rem; text-align:start; }
+.opening-photo figcaption a { text-underline-offset:.23em; }
+.sidebar nav .brief-nav { margin-top:1rem; }
+.reference-preview { padding:clamp(2.8rem,5vw,5.25rem) var(--gutter); background:var(--navy); color:var(--cloud); }
+.reference-preview .label,.reference-preview figcaption { color:#e2e7f0; }
+.section-line { display:flex; align-items:end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:1.6rem; }
+.section-line h2,.consultation-faq h2 { margin-top:.6rem; }
+.rule-link { display:inline-block; width:fit-content; padding-bottom:.3rem; border-bottom:1px solid currentColor; font-weight:700; text-decoration:none; }
+.rule-link:hover { opacity:.76; }
+.reference-strip { display:grid; grid-template-columns:1.3fr 1fr .8fr; gap:clamp(.7rem,1.7vw,1.6rem); }
+.reference-strip a { text-decoration:none; min-width:0; }
+.reference-strip img { aspect-ratio:5/4; height:auto; object-fit:cover; }
+.reference-strip a:hover figcaption { text-decoration:underline; text-underline-offset:.28em; }
+.references-heading > p:last-child { margin-top:1.25rem; max-width:38rem; color:var(--muted); }
+.reference-collection { padding:2rem var(--gutter) 4rem; }
+.reference-filter { display:flex; flex-wrap:wrap; align-items:center; gap:.55rem; margin-bottom:1.8rem; }
+.reference-filter p { margin-left:auto; color:var(--muted); }
+.reference-filter button,.reference-dialog button { border:1px solid currentColor; background:none; color:inherit; padding:.55rem .85rem; min-height:2.75rem; font:inherit; cursor:pointer; }
+.reference-filter button[aria-pressed="true"] { background:var(--navy); color:var(--cloud); border-color:var(--navy); }
+.reference-grid { display:grid; grid-template-columns:1fr 1fr; column-gap:clamp(1rem,4vw,3rem); row-gap:2.5rem; }
+.reference-grid article { scroll-margin-top:1rem; border-top:1px solid var(--border); padding-top:.8rem; }
+.reference-image { display:block; background:var(--border); overflow:hidden; }
+.reference-image img { height:auto; aspect-ratio:4/3; transition:transform .24s; }
+.reference-image:hover img { transform:scale(1.025); }
+.reference-grid h2 { margin:.55rem 0; color:var(--navy); font-size:clamp(1.65rem,3vw,2.8rem); }
+.reference-grid article > p { color:var(--muted); max-width:33rem; }
+.reference-dialog { width:min(94%,65rem); max-height:94dvh; overflow:auto; padding:.9rem; border:1px solid #ffffff55; background:#161b21; color:#f4f1e9; }
+.reference-dialog::backdrop { background:#111720e8; }
+.reference-dialog form { display:flex; justify-content:end; margin-bottom:.65rem; }
+.reference-dialog img { max-height:68dvh; height:auto; object-fit:contain; }
+.reference-dialog figcaption { color:inherit; }
+.reference-dialog-nav { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-top:.75rem; }
+.consultation-faq { display:grid; grid-template-columns:1fr 1.2fr; padding:2.7rem var(--gutter) 3.5rem; gap:2rem; background:var(--cloud); border-top:1px solid var(--border); }
+.questions details { border-bottom:1px solid var(--border); padding:.8rem 0; }
+.questions details:first-child { border-top:1px solid var(--border); }
+.questions summary { cursor:pointer; font-weight:700; }
+.questions p { padding:.45rem 0 0 1rem; color:var(--muted); }
+.questions .rule-link { margin-top:1.1rem; }
+.brief-progress { display:grid; gap:.35rem; }
+.brief-progress progress { width:100%; height:.45rem; accent-color:var(--navy); }
+@media(min-width:761px) { .brief-aside { position:sticky; top:1.25rem; } }
+@media(max-width:760px) {
+  .sidebar nav .brief-nav { margin-top:0; }
+  .consultation-faq { grid-template-columns:1fr; gap:1.2rem; }
+}
+@media(max-width:560px) {
+  .reference-grid { grid-template-columns:1fr; }
+  .reference-strip { grid-template-columns:1fr 1fr; }
+  .reference-strip > a:first-child { grid-column:1/-1; }
+  .reference-strip > a:first-child img { aspect-ratio:16/9; }
+  .reference-filter p { flex-basis:100%; margin-left:0; }
+}
+@media(prefers-reduced-motion:reduce) { .reference-image img { transition:none; } }
+@media print {
+  .brief-page { background:white; color:black; }
+  .brief-page :is(.shell,.content,.brief-layout) { display:block; padding:0; border:0; }
+  .brief-page :is(.sidebar,.footer,.skip,.page-heading,#project-brief,.brief-aside > :not(#brief-printout)) { display:none!important; }
+  .brief-aside { position:static; background:white; color:black; padding:0; }
+  #brief-printout[hidden] { display:block!important; white-space:pre-wrap; overflow-wrap:anywhere; font:12pt/1.5 var(--sans); }
+}

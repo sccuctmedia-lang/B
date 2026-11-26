@@ -12,6 +12,10 @@ const summary = document.querySelector('#brief-summary');
 const status = document.querySelector('#brief-status');
 const copy = document.querySelector('#brief-copy');
 const download = document.querySelector('#brief-download');
+const printButton = document.querySelector('#brief-print');
+const printout = document.querySelector('#brief-printout');
+const meter = document.querySelector('#brief-meter');
+const progressText = document.querySelector('#brief-progress-text');
 const storageKey = 'atlantic-project-brief-v1';
 const inputs = [...form.querySelectorAll('[name]')];
 const selected = new URLSearchParams(location.search).get('service');
@@ -37,7 +41,11 @@ function refresh(save = false) {
   const fields = Object.fromEntries(new FormData(form));
   const complete = formatBrief(fields);
   summary.value = complete;
-  copy.disabled = download.disabled = !complete;
+  copy.disabled = download.disabled = printButton.disabled = !complete;
+  printout.textContent = complete;
+  const count = ['service', 'location', 'scope'].filter(key => fields[key]?.trim()).length;
+  meter.value = count;
+  progressText.textContent = count + ' of 3 required fields complete';
   if (save) storage('write', fields);
 }
 
@@ -72,4 +80,5 @@ download.addEventListener('click', () => {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
   status.textContent = 'Project brief downloaded.';
 });
+printButton.addEventListener('click', () => window.print());
 refresh();
